@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="{{ current_lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _("个性化中心") }} - {{ _("老年肿瘤患者用药科普个性化筛选和推荐") }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+        .language-switcher a {
+            margin-left: 10px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .language-switcher a.active {
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input[type="text"],
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .recommendations-list {
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .recommendations-list h2 {
+            color: #333;
+        }
+        .recommendations-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .recommendations-list li {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .recommendations-list li a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .recommendations-list li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="language-switcher">
+            <a href="{{ url_for("set_language_route", lang_code="zh") }}" class="{% if current_lang == "zh" %}active{% endif %}">中文</a> |
+            <a href="{{ url_for("set_language_route", lang_code="en") }}" class="{% if current_lang == "en" %}active{% endif %}">English</a>
+        </div>
+        <div class="logo-container">
+            <img src="/static/圆形logo.jpg" alt="Peng Peng Health Logo" class="logo">
+            <span class="logo-text">{{ _("蓬蓬科普") }}</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">{{ _("首页") }}</a></li>
+                <li><a href="/knowledge_base">{{ _("用药知识库") }}</a></li>
+                <li><a href="/personalization">{{ _("个性化中心") }}</a></li>
+                <li><a href="/special_topics">{{ _("专题区") }}</a></li>
+                <li><a href="/about">{{ _("关于我们") }}</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>{{ _("个性化中心") }}</h1>
+        <section class="personalization-form">
+            <p>{{ _("请填写您的信息，我们将为您推荐个性化的用药科普内容。") }}</p>
+            <div class="form-group">
+                <label for="cancer_type">{{ _("肿瘤类型") }}:</label>
+                <input type="text" id="cancer_type" placeholder="{{ _("例如：肺癌、胃癌") }}">
+            </div>
+            <div class="form-group">
+                <label for="age_group">{{ _("年龄段") }}:</label>
+                <select id="age_group">
+                    <option value="">{{ _("请选择") }}</option>
+                    <option value="60-69">60-69</option>
+                    <option value="70-79">70-79</option>
+                    <option value="80+">80+</option>
+                </select>
+            </div>
+            <button onclick="getRecommendations()">{{ _("获取推荐") }}</button>
+        </section>
+
+        <section class="recommendations-list" id="recommendations-list">
+            <h2>{{ _("推荐内容") }}</h2>
+            <ul id="recommendations-ul">
+                <li>{{ _("暂无推荐，请填写信息后获取。") }}</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 {{ _("蓬蓬科普") }}. {{ _("保留所有权利") }}.</p>
+    </footer>
+
+    <div class="floating-logo">
+        <img src="/static/圆形logo.jpg" alt="Peng Peng Health Logo">
+        <p>Peng Peng Health</p>
+    </div>
+
+    <script>
+        function getRecommendations() {
+            const cancerType = document.getElementById("cancer_type").value;
+            const ageGroup = document.getElementById("age_group").value;
+
+            fetch("/get_recommendations", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ cancer_type: cancerType, age_group: ageGroup }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                const recommendationsUl = document.getElementById("recommendations-ul");
+                recommendationsUl.innerHTML = ""; // Clear previous recommendations
+
+                if (data.length > 0) {
+                    data.forEach(rec => {
+                        const li = document.createElement("li");
+                        const a = document.createElement("a");
+                        a.href = rec.link;
+                        a.textContent = rec.title;
+                        const p = document.createElement("p");
+                        p.textContent = "{{ _("推荐理由") }}: " + rec.reason;
+                        li.appendChild(a);
+                        li.appendChild(p);
+                        recommendationsUl.appendChild(li);
+                    });
+                } else {
+                    const li = document.createElement("li");
+                    li.textContent = "{{ _("暂无推荐，请填写信息后获取。") }}";
+                    recommendationsUl.appendChild(li);
+                }
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+                const recommendationsUl = document.getElementById("recommendations-ul");
+                recommendationsUl.innerHTML = `<li>{{ _("获取推荐失败，请稍后再试。") }}</li>`;
+            });
+        }
+    </script>
+</body>
+</html>

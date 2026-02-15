@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="{{ current_lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _("用药知识库") }} - {{ _("老年肿瘤患者用药科普个性化筛选和推荐") }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+        .language-switcher a {
+            margin-left: 10px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .language-switcher a.active {
+            font-weight: bold;
+        }
+        .article-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+        .article-card h3 {
+            color: #333;
+            margin-top: 0;
+        }
+        .article-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        .article-card .tags span {
+            display: inline-block;
+            background-color: #e0e0e0;
+            color: #555;
+            border-radius: 4px;
+            padding: 4px 8px;
+            margin-right: 5px;
+            font-size: 0.8em;
+        }
+        .article-card .read-more {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+        .article-card .read-more:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="language-switcher">
+            <a href="{{ url_for("set_language_route", lang_code="zh") }}" class="{% if current_lang == "zh" %}active{% endif %}">中文</a> |
+            <a href="{{ url_for("set_language_route", lang_code="en") }}" class="{% if current_lang == "en" %}active{% endif %}">English</a>
+        </div>
+        <div class="logo-container">
+            <img src="/static/圆形logo.jpg" alt="Peng Peng Health Logo" class="logo">
+            <span class="logo-text">{{ _("蓬蓬科普") }}</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">{{ _("首页") }}</a></li>
+                <li><a href="/knowledge_base">{{ _("用药知识库") }}</a></li>
+                <li><a href="/personalization">{{ _("个性化中心") }}</a></li>
+                <li><a href="/special_topics">{{ _("专题区") }}</a></li>
+                <li><a href="/about">{{ _("关于我们") }}</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>{{ _("用药知识库") }}</h1>
+        <section class="articles-list">
+            {% for article_id, article in articles.items() %}
+            <div class="article-card">
+                <h3>{{ _(article.title) }}</h3>
+                <p><strong>{{ _("分类") }}:</strong> {{ _(article.category) }}</p>
+                <div class="tags">
+                    {% for tag in article.tags %}
+                    <span>{{ _(tag) }}</span>
+                    {% endfor %}
+                </div>
+                <a href="{{ url_for("article_detail", article_id=article_id) }}" class="read-more">{{ _("阅读更多") }}</a>
+            </div>
+            {% endfor %}
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 {{ _("蓬蓬科普") }}. {{ _("保留所有权利") }}.</p>
+    </footer>
+
+    <div class="floating-logo">
+        <img src="/static/圆形logo.jpg" alt="Peng Peng Health Logo">
+        <p>Peng Peng Health</p>
+    </div>
+</body>
+</html>

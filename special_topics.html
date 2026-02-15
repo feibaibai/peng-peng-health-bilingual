@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="{{ current_lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _("专题区") }} - {{ _("老年肿瘤患者用药科普个性化筛选和推荐") }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+        .language-switcher a {
+            margin-left: 10px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .language-switcher a.active {
+            font-weight: bold;
+        }
+        .topic-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .topic-list li {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 1em;
+            margin-bottom: 1em;
+            border-radius: 5px;
+        }
+        .topic-list li h3 {
+            margin-top: 0;
+        }
+        .topic-list li a {
+            text-decoration: none;
+            color: #337ab7;
+            font-weight: bold;
+        }
+        .topic-list li p {
+            margin-bottom: 0.5em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="language-switcher">
+            <a href="{{ url_for("set_language_route", lang_code="zh") }}" class="{% if current_lang == "zh" %}active{% endif %}">中文</a> |
+            <a href="{{ url_for("set_language_route", lang_code="en") }}" class="{% if current_lang == "en" %}active{% endif %}">English</a>
+        </div>
+        <div class="logo-container">
+            <img src="/static/圆形logo.jpg" alt="Peng Peng Health Logo" class="logo">
+            <span class="logo-text">{{ _("蓬蓬科普") }}</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">{{ _("首页") }}</a></li>
+                <li><a href="/knowledge_base">{{ _("用药知识库") }}</a></li>
+                <li><a href="/personalization">{{ _("个性化中心") }}</a></li>
+                <li><a href="/special_topics">{{ _("专题区") }}</a></li>
+                <li><a href="/about">{{ _("关于我们") }}</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>{{ _("精选专题") }}</h1>
+        <p>{{ _("这里汇集了针对老年肿瘤患者常见用药问题、护理、生活方式调整等方面的深度科普文章和指南。") }}</p>
+        
+        <div class="topic-item">
+            <h3><a href="/article/chemotherapy_side_effects">{{ _("老年患者化疗常见副作用及应对") }}</a></h3>
+            <p>{{ _("详细解读老年患者在化疗过程中可能出现的特有副作用，并提供实用的应对和缓解方法。") }}</p>
+        </div>
+        <div class="topic-item">
+            <h3><a href="/article/pain_management">{{ _("肿瘤相关性疼痛在老年患者中的管理") }}</a></h3>
+            <p>{{ _("介绍老年肿瘤患者疼痛评估方法、常用止痛药物的选择原则及非药物治疗手段。") }}</p>
+        </div>
+        <div class="topic-item">
+            <h3><a href="#">{{ _("靶向药物引起的皮肤反应：预防与处理") }}</a></h3>
+            <p>{{ _("针对多种靶向药物可能导致的皮肤干燥、皮疹、瘙痒等问题，提供预防和护理建议。") }}</p>
+        </div>
+        <div class="topic-item">
+            <h3><a href="#">{{ _("老年肿瘤患者多重用药管理策略") }}</a></h3>
+            <p>{{ _("探讨老年肿瘤患者常合并多种慢性病，面临多重用药的风险及管理对策，如何避免药物相互作用。") }}</p>
+        </div>
+        <!-- 更多专题将动态加载于此 -->
+    </main>
+
+    <footer>
+        <p>&copy; 2023 {{ _("蓬蓬科普") }}. {{ _("保留所有权利") }}.</p>
+    </footer>
+
+    <div class="floating-logo">
+        <img src="/static/圆形logo.jpg" alt="Peng Peng Health Logo">
+        <p>Peng Peng Health</p>
+    </div>
+</body>
+</html>
