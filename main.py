@@ -3,7 +3,7 @@ import os
 
 # 在 Vercel 环境中，所有文件都在根目录
 app = Flask(__name__, template_folder='.', static_folder='.')
-app.secret_key = 'some_secret_key'
+app.secret_key = os.environ.get('SECRET_KEY', 'some_secret_key')
 
 # 翻译字典
 translations = {
@@ -131,7 +131,7 @@ translations = {
         '二维码1': 'QR Code 1',
         '二维码2': 'QR Code 2',
         '二维码3': 'QR Code 3',
-        '本项目旨在运用机器学习技术，搭建一个基于人际连续性的社区老年肿瘤患者用药科普教育新体系。随着我国人口老龄化趋势加剧，老年肿瘤患者数量逐年增多，他们往往面临多病共存、多重用药、生理功能衰退等复杂情况，导致用药风险增高，用药依从性差，严重影响治疗效果和生活质量。': 'This project aims to use machine learning technology to build a new system for medication education for community elderly cancer patients based on interpersonal continuity. With the intensification of the aging trend in China, the number of elderly cancer patients is increasing year by year. They often face complex situations such as comorbidities, polypharmacy, and decline in physiological functions, leading to increased medication risks and poor compliance, which seriously affects treatment outcomes and quality of life.',
+        '本项目旨在运用机器学习技术，搭建一个基于人际连续性的社区老年肿瘤患者用药科普教育新体系。随着我国人口老龄化趋势加剧，老年肿瘤患者数量逐年增多，他们往往面临多病共存、多重用药、生理功能衰退等复杂情况，导致用药风险增高，用药依从性差，严重影响治疗效果 and 生活质量。': 'This project aims to use machine learning technology to build a new system for medication education for community elderly cancer patients based on interpersonal continuity. With the intensification of the aging trend in China, the number of elderly cancer patients is increasing year by year. They often face complex situations such as comorbidities, polypharmacy, and decline in physiological functions, leading to increased medication risks and poor compliance, which seriously affects treatment outcomes and quality of life.',
         '传统的用药教育模式往往缺乏针对性和个性化，难以满足老年患者的特殊需求。本平台致力于解决这一痛点，通过整合权威的用药科普知识，结合机器学习算法，为老年肿瘤患者提供个性化的信息筛选 and 智能推荐服务，帮助他们及其家属更清晰、便捷地获取所需用药知识，提高用药安全性和有效性，最终改善患者的健康结局。': 'Traditional medication education models often lack pertinence and personalization, making it difficult to meet the special needs of elderly patients. This platform is dedicated to solving this pain point. By integrating authoritative medication knowledge and combining machine learning algorithms, it provides personalized information screening and intelligent recommendation services for elderly cancer patients, helping them and their families obtain the required medication knowledge more clearly and conveniently, improving medication safety and effectiveness, and ultimately improving patient health outcomes.',
         '平台的核心技术依托于项目申报书中提出的方案，主要包括：': 'The core technology of the platform relies on the plan proposed in the project application, mainly including:',
         '知识图谱构建:': 'Knowledge Graph Construction:',
@@ -144,7 +144,6 @@ translations = {
         '本网站提供的所有信息仅用于科普教育目的，不能替代任何专业的医疗诊断、治疗建议或处方。老年肿瘤患者的用药方案复杂且个体差异大，请务必在专业医师 or 药师的指导下进行治疗和用药调整。': 'All information provided on this website is for science popularization and education purposes only and cannot replace any professional medical diagnosis, treatment advice, or prescription. The medication regimen for elderly cancer patients is complex and has large individual differences. Please be sure to undergo treatment and medication adjustment under the guidance of a professional physician or pharmacist.',
         '若您在浏览本网站内容后有任何关于自身健康状况 or 治疗方案的疑问，请及时咨询您的主治医生或相关医疗专业人士。对于因依赖本网站信息而采取的任何行动所导致的任何直接或间接损失，本平台不承担任何责任。': 'If you have any questions about your own health status or treatment plan after browsing the content of this website, please consult your attending physician or relevant medical professionals in time. This platform does not assume any responsibility for any direct or indirect losses caused by any actions taken based on the information on this website.',
         '如果您对本平台有任何建议或疑问，欢迎通过以下方式联系我们：': 'If you have any suggestions or questions about this platform, please feel free to contact us through the following ways:',
-        '联系我们': 'Contact Us',
     }
 }
 
