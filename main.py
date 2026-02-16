@@ -1,7 +1,8 @@
 import os
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 
-app = Flask(__name__, template_folder='.')
+# 在 Vercel 环境下，显式指定模板文件夹为当前目录
+app = Flask(__name__, template_folder=os.path.dirname(os.path.abspath(__file__)))
 app.secret_key = 'peng_peng_health_secret_key'
 
 # 翻译字典
@@ -21,7 +22,7 @@ translations = {
         'about_title': '关于我们',
         'about_bg_title': '项目背景与目标',
         'about_bg_p1': '本项目旨在运用机器学习技术，搭建一个基于人际连续性的社区老年肿瘤患者用药科普教育新体系。随着我国人口老龄化趋势加剧，老年肿瘤患者数量逐年增多，他们往往面临多病共存、多重用药、生理功能衰退等复杂情况，导致用药风险增高，用药依从性差，严重影响治疗效果和生活质量。',
-        'about_bg_p2': '传统的用药教育模式往往缺乏针对性和个性化，难以满足老年患者的特殊需求。本平台致力于解决这一痛点，通过整合权威的用药科普知识，结合机器学习算法，为老年肿瘤患者提供个性化的信息筛选和智能推荐服务，帮助他们及其家属更清晰、便捷地获取所需用药知识，提高用药安全性和有效性，最终改善患者的健康结局。',
+        'about_bg_p2': '传统的用药教育模式往往缺乏针对性和个性化，难以满足老年患者的特殊需求。本平台致力于解决这一痛点，通过整合权威的用药科普知识，结合机器学习算法，为老年肿瘤患者提供个性化的信息筛选 and 智能推荐服务，帮助他们及其家属更清晰、便捷地获取所需用药知识，提高用药安全性和有效性，最终改善患者的健康结局。',
         'about_tech_title': '核心技术',
         'about_tech_intro': '平台的核心技术依托于项目申报书中提出的方案，主要包括：',
         'about_tech_li1_title': '知识图谱构建:',
