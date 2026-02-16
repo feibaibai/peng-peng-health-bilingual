@@ -2,7 +2,9 @@ import os
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 
 # 在 Vercel 环境下，显式指定模板文件夹为当前目录
-app = Flask(__name__, template_folder=os.path.dirname(os.path.abspath(__file__)))
+# 这样 Flask 就能在根目录下找到 index.html, about.html 等文件
+template_dir = os.path.dirname(os.path.abspath(__file__))
+app = Flask(__name__, template_folder=template_dir, static_folder=template_dir, static_url_path='')
 app.secret_key = 'peng_peng_health_secret_key'
 
 # 翻译字典
