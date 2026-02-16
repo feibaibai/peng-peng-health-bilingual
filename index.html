@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="{{ current_lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _("title") }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+        .language-switcher a {
+            margin-left: 10px;
+            color: #fff;
+            text-decoration: none;
+        }
+        .language-switcher a.active {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="language-switcher">
+            <a href="{{ url_for('set_lang', lang='zh') }}" class="{% if current_lang == 'zh' %}active{% endif %}">中文</a> |
+            <a href="{{ url_for('set_lang', lang='en') }}" class="{% if current_lang == 'en' %}active{% endif %}">English</a>
+        </div>
+        <div class="logo-container">
+            <span class="logo-text">{{ _("brand") }}</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">{{ _("nav_home") }}</a></li>
+                <li><a href="{{ url_for('knowledge_base') }}">{{ _("nav_kb") }}</a></li>
+                <li><a href="{{ url_for('personalization') }}">{{ _("nav_personal") }}</a></li>
+                <li><a href="{{ url_for('special_topics') }}">{{ _("nav_topics") }}</a></li>
+                <li><a href="{{ url_for('about') }}">{{ _("nav_about") }}</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>{{ _("welcome_title") }}</h1>
+            <p>{{ _("welcome_subtitle") }}</p>
+            <a href="{{ url_for('personalization') }}" class="button">{{ _("nav_personal") }}</a>
+        </section>
+
+        <section class="features">
+            <div class="feature-item">
+                <h2>{{ _("nav_personal") }}</h2>
+                <p>根据您的肿瘤类型、用药情况和身体状况，为您推荐最相关的科普文章和用药建议。</p>
+            </div>
+            <div class="feature-item">
+                <h2>{{ _("nav_kb") }}</h2>
+                <p>涵盖各类肿瘤药物的详细信息、副作用管理、药物相互作用等专业知识。</p>
+            </div>
+            <div class="feature-item">
+                <h2>{{ _("nav_topics") }}</h2>
+                <p>定期更新热门话题、最新研究进展和专家解读，助您全面了解肿瘤治疗。</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 {{ _("brand") }}. All rights reserved.</p>
+    </footer>
+</body>
+</html>
