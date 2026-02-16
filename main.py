@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for, j
 import os
 
 # 在 Vercel 环境中，所有文件都在根目录
+# 显式设置 template_folder='.' 以确保 Jinja2 能找到 index.html 等文件
 app = Flask(__name__, template_folder='.', static_folder='.')
 app.secret_key = os.environ.get('SECRET_KEY', 'some_secret_key')
 
@@ -86,7 +87,7 @@ translations = {
         '蓬蓬科普': 'Peng Peng Health',
         '老年肿瘤患者用药科普个性化筛选和推荐': 'Personalized Drug Science Popularization and Recommendation for Elderly Cancer Patients',
         '欢迎来到蓬蓬科普': 'Welcome to Peng Peng Health',
-        '为老年肿瘤患者提供个性化的用药科普和推荐': 'Providing personalized drug science popularization and recommendations for elderly cancer patients',
+        '为老年肿瘤患者提供个性化的用药科普 and 推荐': 'Providing personalized drug science popularization and recommendations for elderly cancer patients',
         '欢迎来到老年肿瘤患者用药科普平台': 'Welcome to the Medication Education Platform for Elderly Cancer Patients',
         '我们致力于为老年肿瘤患者提供个性化的用药科普信息，帮助您更好地了解和管理药物治疗。': 'We are committed to providing personalized medication education for elderly cancer patients, helping you better understand and manage your treatment.',
         '获取个性化推荐': 'Get Personalized Recommendations',
@@ -99,7 +100,7 @@ translations = {
         '标签': 'Tags',
         '返回上一页': 'Go Back',
         '保留所有权利': 'All Rights Reserved',
-        '这里汇集了针对老年肿瘤患者常见用药问题、护理、生活方式调整等方面的深度科普文章和指南。': 'Here is a collection of in-depth science popularization articles and guides on common medication issues, nursing, and lifestyle adjustments for elderly cancer patients.',
+        '这里汇集了针对老年肿瘤患者常见用药问题、护理、生活方式调整等方面的深度科普文章 and 指南。': 'Here is a collection of in-depth science popularization articles and guides on common medication issues, nursing, and lifestyle adjustments for elderly cancer patients.',
         '靶向药物引起的皮肤反应：预防与处理': 'Skin Reactions Caused by Targeted Drugs: Prevention and Treatment',
         '针对多种靶向药物可能导致的皮肤干燥、皮疹、瘙痒等问题，提供预防 and 护理建议。': 'Provide prevention and care suggestions for skin dryness, rash, itching and other problems that may be caused by various targeted drugs.',
         '老年肿瘤患者多重用药管理策略': 'Polypharmacy Management Strategies for Elderly Cancer Patients',
