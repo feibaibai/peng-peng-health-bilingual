@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="{{ current_lang }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ _("关于我们") }} - {{ _("蓬蓬科普") }}</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .language-switcher {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+        .language-switcher a {
+            margin-left: 10px;
+            color: #333;
+            text-decoration: none;
+        }
+        .language-switcher a.active {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .content-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            padding: 0;
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+        }
+        main {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <span class="logo-text" style="font-size: 24px; font-weight: bold; color: #007bff;">{{ _("蓬蓬科普") }}</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/">{{ _("首页") }}</a></li>
+                <li><a href="/knowledge_base">{{ _("用药知识库") }}</a></li>
+                <li><a href="/personalization">{{ _("个性化中心") }}</a></li>
+                <li><a href="/special_topics">{{ _("专题区") }}</a></li>
+                <li><a href="/about">{{ _("关于我们") }}</a></li>
+            </ul>
+        </nav>
+        <div class="language-switcher">
+            <a href="{{ url_for('set_language_route', lang_code='zh') }}" class="{% if current_lang == 'zh' %}active{% endif %}">中文</a> |
+            <a href="{{ url_for('set_language_route', lang_code='en') }}" class="{% if current_lang == 'en' %}active{% endif %}">English</a>
+        </div>
+    </header>
+
+    <main>
+        <h1>{{ _("关于我们") }}</h1>
+        
+        <section class="content-section">
+            <h2>{{ _("项目背景与目标") }}</h2>
+            <p>{{ _("本项目旨在运用机器学习技术，搭建一个基于人际连续性的社区老年肿瘤患者用药科普教育新体系。随着我国人口老龄化趋势加剧，老年肿瘤患者数量逐年增多，他们往往面临多病共存、多重用药、生理功能衰退等复杂情况，导致用药风险增高，用药依从性差，严重影响治疗效果和生活质量。") }}</p>
+            <p>{{ _("传统的用药教育模式往往缺乏针对性和个性化，难以满足老年患者的特殊需求。本平台致力于解决这一痛点，通过整合权威的用药科普知识，结合机器学习算法，为老年肿瘤患者提供个性化的信息筛选和智能推荐服务，帮助他们及其家属更清晰、便捷地获取所需用药知识，提高用药安全性和有效性，最终改善患者的健康结局。") }}</p>
+        </section>
+
+        <section class="content-section">
+            <h2>{{ _("核心技术") }}</h2>
+            <p>{{ _("平台的核心技术依托于项目申报书中提出的方案，主要包括：") }}</p>
+            <ul>
+                <li><strong>{{ _("知识图谱构建:") }}</strong> {{ _("系统化梳理和组织老年肿瘤用药相关的知识，包括药物信息、疾病信息、症状、不良反应、相互作用等，形成结构化的知识网络，为精准检索和智能推荐奠定基础。") }}</li>
+                <li><strong>{{ _("分面检索:") }}</strong> {{ _("基于知识图谱，提供多维度、层级化的信息筛选方式，帮助用户快速定位到所需的科普内容。") }}</li>
+                <li><strong>{{ _("机器学习与个性化推荐:") }}</strong> {{ _("通过分析用户提供的个人情况（如肿瘤类型、年龄、合并症等）和浏览行为，构建用户画像，利用机器学习算法（如协同过滤、基于内容的推荐等）实现个性化的科普信息推送。") }}</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2>{{ _("数据来源与权威性") }}</h2>
+            <p>{{ _("本平台提供的所有科普信息均来源于权威医学指南、专业医学文献、以及临床药学专家的经验总结。我们会尽最大努力确保信息的准确性和时效性。项目团队由重庆大学附属肿瘤医院的药学专家和技术人员组成，致力于提供高质量的科普内容。") }}</p>
+        </section>
+
+        <section class="content-section">
+            <h2>{{ _("免责声明") }}</h2>
+            <p><strong>{{ _("重要提示：") }}</strong> {{ _("本网站提供的所有信息仅用于科普教育目的，不能替代任何专业的医疗诊断、治疗建议 or 处方。老年肿瘤患者的用药方案复杂且个体差异大，请务必在专业医师 or 药师的指导下进行治疗和用药调整。") }}</p>
+            <p>{{ _("若您在浏览本网站内容后有任何关于自身健康状况 or 治疗方案的疑问，请及时咨询您的主治医生或相关医疗专业人士。对于因依赖本网站信息而采取的任何行动所导致的任何直接或间接损失，本平台不承担任何责任。") }}</p>
+        </section>
+
+        <section class="content-section">
+            <h2>{{ _("联系我们") }}</h2>
+            <p>{{ _("如果您对本平台有任何建议或疑问，欢迎通过以下方式联系我们：") }}</p>
+            <p>{{ _("项目负责人：白浩") }}</p>
+            <p>{{ _("联系电话：023-65079130 (此为申报书中电话，实际部署时可替换)") }}</p>
+            <p>{{ _("单位：重庆大学附属肿瘤医院 (此为申报书中单位，实际部署时可替换)") }}</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 {{ _("蓬蓬科普") }} (Peng Peng Health). {{ _("保留所有权利") }}.</p>
+    </footer>
+</body>
+</html>
